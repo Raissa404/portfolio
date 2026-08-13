@@ -15,7 +15,7 @@ export default function Hero() {
             </Reveal>
             <Reveal delay={100}>
               <h1 className="hero__name">
-                Onjatina <em>Raissa</em>
+                {personal.first} <em>{personal.second}</em>
               </h1>
               <svg
                 className="scribble"
@@ -35,20 +35,17 @@ export default function Hero() {
             <Reveal delay={180}>
               <p className="hero__role">
                 <span className="hero__mark" aria-hidden="true" />
-                Développeur fullstack
+                {personal.role}
               </p>
             </Reveal>
             <Reveal delay={240}>
               <p className="hero__status">
                 <span className="pulse-dot" aria-hidden="true" />
-                <b>Disponible pour un stage</b>
+                <b>{personal.status}</b>
               </p>
             </Reveal>
             <Reveal delay={300}>
-              <p className="hero__desc">
-                Je développe des applications web et logicielles en combinant
-                créativité, logique et technologies modernes.
-              </p>
+              <p className="hero__desc">{personal.description}</p>
             </Reveal>
             <Reveal delay={380}>
               <div className="hero__actions">

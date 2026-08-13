@@ -1,4 +1,4 @@
-import { links, personal } from "@/lib/data";
+import { fullLabel, fullName, links, personal } from "@/lib/data";
 
 const socials = [
   { label: "GitHub", href: links.github },
@@ -9,15 +9,15 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__mark" aria-hidden="true">
-        Raissa
+        {personal.second}
       </div>
       <div className="container">
         <div className="footer__top">
           <div>
             <p className="footer__name">
-              FANEVASOA <em>Onjatina Raissa</em>
+              {personal.last} <em>{fullName}</em>
             </p>
-            <p className="footer__role">L2 Informatique — EMIT</p>
+            <p className="footer__role">{personal.role}</p>
           </div>
           <div className="footer__socials">
             {socials.map((s) => (
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer__bottom">
-          <span>© 2026 FANEVASOA Onjatina Raissa</span>
+          <span>© {personal.year} {fullLabel}</span>
         </div>
       </div>
     </footer>

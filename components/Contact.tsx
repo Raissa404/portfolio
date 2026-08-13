@@ -1,7 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { links } from "@/lib/data";
+import { fullName, links } from "@/lib/data";
 
 const contactLinks = [
   { label: "CV", href: "/CV.pdf", text: "Télécharger mon CV (PDF)" },
@@ -30,7 +30,7 @@ export default function Contact() {
           </p>
           <p className="contact__signature">
             <span>signé</span>
-            Onjatina Raissa
+            {fullName}
           </p>
         </Reveal>
 

@@ -3,7 +3,7 @@ import { Inter, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { personal } from "@/lib/data";
+import { fullLabel, personal } from "@/lib/data";
 
 const serif = Newsreader({
   subsets: ["latin"],
@@ -27,9 +27,9 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${personal.last} ${personal.first} — Portfolio`,
+  title: `${fullLabel} — Portfolio`,
   description:
-    "Portfolio de FANEVASOA Onjatina Raissa, étudiante en L2 informatique à l'EMIT. Développement web et logiciel : Next.js, JavaScript, Java, C#, PHP, MySQL.",
+    `Portfolio de ${fullLabel}, développeur fullstack. Développement web et logiciel : Next.js, JavaScript, Java, C#, PHP, MySQL.`,
   keywords: [
     "FANEVASOA Onjatina Raissa",
     "portfolio",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "développement web",
   ],
   openGraph: {
-    title: `${personal.last} ${personal.first} — Portfolio`,
+    title: `${fullLabel} — Portfolio`,
     description:
       "Développeur fullstack, passionné par le développement web et logiciel.",
     type: "website",
