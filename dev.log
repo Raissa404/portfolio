@@ -1,0 +1,24 @@
+
+> fanevasoa-raissa-portfolio@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.23
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.120.28:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 17.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 41.8s (705 modules)
+ GET / 200 in 45034ms
+ ○ Compiling /icon.svg ...
+ ✓ Compiled /icon.svg in 4s (419 modules)
+ GET /icon.svg?bcf014253e78f621 200 in 4352ms
+ ✓ Compiled in 581ms (402 modules)
+ ✓ Compiled in 237ms (402 modules)
+ ✓ Compiled in 360ms (402 modules)
+ ✓ Compiled in 590ms (402 modules)
+ ✓ Compiled in 225ms (402 modules)
+ ✓ Compiled in 2.6s (664 modules)
+ ✓ Compiled in 645ms (664 modules)
