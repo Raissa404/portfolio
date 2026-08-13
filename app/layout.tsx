@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${personal.last} ${personal.first} — Portfolio`,
     description:
-      "Étudiante en informatique à l'EMIT, passionnée par le développement web et logiciel.",
+      "Développeur fullstack, passionné par le développement web et logiciel.",
     type: "website",
     locale: "fr_FR",
   },

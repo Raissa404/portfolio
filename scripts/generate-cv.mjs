@@ -2,21 +2,21 @@ import fs from "node:fs";
 import path from "node:path";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
-const DARK = rgb(0.13, 0.11, 0.09); // #211c15
-const PAPER = rgb(0.09, 0.08, 0.06); // sidebar bg
-const INK = rgb(0.92, 0.89, 0.83); // light text
-const MUTED = rgb(0.55, 0.5, 0.44);
-const ACCENT = rgb(0.88, 0.4, 0.18); // #e0662f
-const TRACK = rgb(0.3, 0.27, 0.22);
-const LIGHT = rgb(1, 1, 1);
+const INK = rgb(0.12, 0.12, 0.12); // #1f1f1f
+const SOFT = rgb(0.42, 0.42, 0.42); // #6b6b6b
+const MUTED = rgb(0.6, 0.6, 0.6); // #999
+const FAINT = rgb(0.86, 0.86, 0.86); // #dbdbdb
+const PAPER = rgb(1, 1, 1); // #ffffff
+const SIDE = rgb(0.958, 0.953, 0.946); // sidebar bg
+const TRACK = rgb(0.87, 0.865, 0.855); // skill track
+const ACCENT = rgb(0.16, 0.16, 0.16); // #292929
 
 const PERSONAL = {
   name: "Onjatina Raissa",
   last: "FANEVASOA",
-  role: "Étudiante en informatique — L2 · EMIT",
+  role: "Développeur fullstack",
   email: "fanevasoaonjatinaraissa@gmail.com",
   github: "github.com/Raissa404",
-  linkedin: "linkedin.com/in/fanevasoa-raissa",
 };
 
 const PROFILE =
@@ -54,26 +54,34 @@ const SKILLS = [
   },
 ];
 
+const INTERESTS = [
+  "Veille technologique",
+  "Design & interface",
+  "Lecture",
+  "Musique",
+  "Jeux d'échecs",
+];
+
 const PROJECTS = [
   {
     num: "01",
     title: "Gestion de scolarité",
     type: "Application web",
-    desc: "Application web pour organiser et consulter les données scolaires, avec une interface claire et structurée.",
+    desc: "Plateforme web de gestion des données scolaires : ajout, modification et consultation des élèves, enseignants et classes. Interface responsive avec recherche et filtres, tableaux de bord et génération de listes. Conception de la base de données MySQL (schéma relationnel, requêtes optimisées).",
     techs: "Next.js · JavaScript · MySQL",
   },
   {
     num: "02",
     title: "Gestion de bibliothèque",
     type: "Application desktop",
-    desc: "Organisation des livres, des utilisateurs et des opérations de prêt dans une application de bureau.",
+    desc: "Application de bureau de gestion d'une bibliothèque : catalogue des livres, gestion des membres, enregistrement et suivi des emprunts et retours, avec contrôle des retards. Modèle orienté objet en Java, persistance des données et interface graphique ergonomique.",
     techs: "Java",
   },
   {
     num: "03",
     title: "Gestion de vente d'aluminium",
     type: "Application web",
-    desc: "Gestion des ventes, des produits et des transactions liées à la vente d'aluminium.",
+    desc: "Application web de gestion commerciale : suivi des produits, des stocks et des ventes, enregistrement des transactions et génération des états. Backend en PHP avec base de données MySQL, sessions et authentification des utilisateurs.",
     techs: "PHP · MySQL",
   },
 ];
@@ -103,22 +111,21 @@ function paragraph(page, { text, x, y, maxWidth, size, lineHeight, font, color, 
 }
 
 function sectionTitle(page, { x, y, label, font, color, titleWidth }) {
-  page.drawRectangle({ x, y: y - 3.5, width: 4, height: 11, color: ACCENT });
   page.drawText(label.toUpperCase(), {
-    x: x + 11,
+    x,
     y,
     size: 10,
     font,
-    color,
-    letterSpacing: 1.5,
+    color: ACCENT,
+    letterSpacing: 2.5,
   });
   page.drawLine({
-    start: { x: x + 11 + titleWidth + 8, y: y - 2 },
-    end: { x: 560, y: y - 2 },
-    thickness: 0.7,
-    color: MUTED,
+    start: { x, y: y - 6 },
+    end: { x: x + titleWidth, y: y - 6 },
+    thickness: 1.1,
+    color: FAINT,
   });
-  return y - 26;
+  return y - 28;
 }
 
 async function main() {
@@ -129,178 +136,180 @@ async function main() {
   const helvBold = await pdf.embedFont(StandardFonts.HelveticaBold);
   const helvOblique = await pdf.embedFont(StandardFonts.HelveticaOblique);
 
-  const SIDEBAR = 210;
+  const SIDEBAR = 220;
+  const sideMax = SIDEBAR - 52;
 
-  // ---- Sidebar background ----
-  page.drawRectangle({ x: 0, y: 0, width: SIDEBAR, height: 841.89, color: PAPER });
-  page.drawRectangle({ x: SIDEBAR, y: 0, width: 1.5, height: 841.89, color: ACCENT });
+  // ---- Base ----
+  page.drawRectangle({ x: 0, y: 0, width: 595.28, height: 841.89, color: PAPER });
 
-  // ---- Sidebar content ----
-  let sy = 782;
-
+  // ---- Header ----
   page.drawText(PERSONAL.last, {
-    x: 26,
-    y: sy,
+    x: 40,
+    y: 782,
     size: 11,
     font: helv,
-    color: ACCENT,
-    letterSpacing: 3,
+    color: SOFT,
+    letterSpacing: 4,
   });
-  sy -= 30;
   page.drawText(PERSONAL.name, {
-    x: 26,
-    y: sy,
-    size: 26,
+    x: 40,
+    y: 744,
+    size: 32,
     font: helvBold,
     color: INK,
   });
-  sy -= 22;
-  page.drawLine({
-    start: { x: 26, y: sy },
-    end: { x: SIDEBAR - 26, y: sy },
-    thickness: 1,
-    color: ACCENT,
+  page.drawText(PERSONAL.role.toUpperCase(), {
+    x: 40,
+    y: 720,
+    size: 10,
+    font: helv,
+    color: SOFT,
+    letterSpacing: 3,
   });
-  sy -= 20;
-  const roleLines = wrap(PERSONAL.role, helv, 9.5, SIDEBAR - 52);
-  page.drawText(roleLines[0], { x: 26, y: sy, size: 9.5, font: helv, color: INK });
-  if (roleLines[1]) {
-    sy -= 15;
-    page.drawText(roleLines[1], { x: 26, y: sy, size: 9.5, font: helv, color: INK });
-  }
-  sy -= 40;
+  page.drawLine({
+    start: { x: 40, y: 692 },
+    end: { x: 555, y: 692 },
+    thickness: 1,
+    color: FAINT,
+  });
+
+  // ---- Sidebar background ----
+  page.drawRectangle({ x: 0, y: 0, width: SIDEBAR, height: 692, color: SIDE });
+
+  // ---- Sidebar content ----
+  let sy = 645;
 
   // Contact
-  sy = sectionTitle(page, { x: 26, y: sy, label: "Coordonnées", font: helvBold, color: INK, titleWidth: 88 });
+  page.drawText("CONTACT", { x: 26, y: sy, size: 9, font: helvBold, color: INK, letterSpacing: 2.5 });
+  page.drawLine({ start: { x: 26, y: sy - 6 }, end: { x: SIDEBAR - 26, y: sy - 6 }, thickness: 0.8, color: FAINT });
+  sy -= 26;
   const contacts = [
     ["Email", PERSONAL.email],
     ["GitHub", PERSONAL.github],
-    ["LinkedIn", PERSONAL.linkedin],
   ];
   for (const [label, value] of contacts) {
-    page.drawText(label.toUpperCase(), { x: 26, y: sy, size: 7, font: helvBold, color: ACCENT, letterSpacing: 1 });
+    page.drawText(label.toUpperCase(), { x: 26, y: sy, size: 7, font: helvBold, color: SOFT, letterSpacing: 1.5 });
     sy -= 12;
-    for (const line of wrap(value, helv, 8.5, SIDEBAR - 52)) {
-      page.drawText(line, { x: 26, y: sy, size: 8.5, font: helv, color: INK });
-      sy -= 13;
-    }
-    sy -= 6;
-  }
-  sy -= 12;
-
-  // Skills
-  sy = sectionTitle(page, { x: 26, y: sy, label: "Compétences", font: helvBold, color: INK, titleWidth: 90 });
-  for (const group of SKILLS) {
-    page.drawText(group.label.toUpperCase(), {
-      x: 26,
-      y: sy,
-      size: 7.5,
-      font: helvBold,
-      color: MUTED,
-      letterSpacing: 1.2,
-    });
-    sy -= 15;
-    for (const [name, level] of group.items) {
-      page.drawText(name, { x: 26, y: sy, size: 9, font: helv, color: INK });
-      sy -= 10;
-      page.drawRectangle({ x: 26, y: sy, width: SIDEBAR - 52, height: 3, color: TRACK });
-      page.drawRectangle({
-        x: 26,
-        y: sy,
-        width: (SIDEBAR - 52) * (level / 5),
-        height: 3,
-        color: ACCENT,
-      });
+    for (const line of wrap(value, helv, 9, sideMax)) {
+      page.drawText(line, { x: 26, y: sy, size: 9, font: helv, color: INK });
       sy -= 14;
     }
     sy -= 8;
   }
+  sy -= 8;
+
+  // Skills
+  page.drawText("COMPÉTENCES", { x: 26, y: sy, size: 9, font: helvBold, color: INK, letterSpacing: 2.5 });
+  page.drawLine({ start: { x: 26, y: sy - 6 }, end: { x: SIDEBAR - 26, y: sy - 6 }, thickness: 0.8, color: FAINT });
+  sy -= 26;
+  for (const group of SKILLS) {
+    page.drawText(group.label.toUpperCase(), {
+      x: 26,
+      y: sy,
+      size: 7,
+      font: helvBold,
+      color: SOFT,
+      letterSpacing: 1.5,
+    });
+    sy -= 16;
+    for (const [name, level] of group.items) {
+      page.drawText(name, { x: 26, y: sy, size: 9.5, font: helv, color: INK });
+      sy -= 11;
+      page.drawRectangle({ x: 26, y: sy, width: sideMax, height: 2.5, color: TRACK });
+      page.drawRectangle({
+        x: 26,
+        y: sy,
+        width: sideMax * (level / 5),
+        height: 2.5,
+        color: ACCENT,
+      });
+      sy -= 15;
+    }
+    sy -= 8;
+  }
+
+  // Interests
+  page.drawText("CENTRES D'INTÉRÊT", { x: 26, y: sy, size: 9, font: helvBold, color: INK, letterSpacing: 2.5 });
+  page.drawLine({ start: { x: 26, y: sy - 6 }, end: { x: SIDEBAR - 26, y: sy - 6 }, thickness: 0.8, color: FAINT });
+  sy -= 26;
+  for (const interest of INTERESTS) {
+    page.drawText(`•  ${interest}`, { x: 26, y: sy, size: 9, font: helv, color: INK });
+    sy -= 15;
+  }
 
   // ---- Right column ----
-  const RX = 250;
+  const RX = SIDEBAR + 30;
   const MAXW = 555 - RX;
-  let ry = 782;
+  let ry = 645;
 
-  ry = sectionTitle(page, { x: RX, y: ry, label: "Profil", font: helvBold, color: DARK, titleWidth: 40 });
+  ry = sectionTitle(page, { x: RX, y: ry, label: "Profil", font: helvBold, color: INK, titleWidth: 40 });
   ry = paragraph(page, {
     text: PROFILE,
     x: RX,
     y: ry,
     maxWidth: MAXW,
-    size: 10,
-    lineHeight: 16,
+    size: 9.5,
+    lineHeight: 15,
     font: helv,
-    color: DARK,
+    color: SOFT,
   });
 
-  ry -= 30;
-  ry = sectionTitle(page, { x: RX, y: ry, label: "Formation", font: helvBold, color: DARK, titleWidth: 70 });
+  ry -= 34;
+  ry = sectionTitle(page, { x: RX, y: ry, label: "Formation", font: helvBold, color: INK, titleWidth: 70 });
   for (const e of EDUCATION) {
-    page.drawText(e.period, { x: RX, y: ry, size: 8, font: helvBold, color: ACCENT, letterSpacing: 1 });
+    page.drawText(e.period, { x: RX, y: ry, size: 8, font: helvBold, color: SOFT, letterSpacing: 1.5 });
+    ry -= 17;
+    page.drawText(e.title, { x: RX, y: ry, size: 14, font: helvBold, color: INK });
     ry -= 16;
-    page.drawText(e.title, { x: RX, y: ry, size: 14, font: helvBold, color: DARK });
-    ry -= 16;
-    page.drawText(e.school, { x: RX, y: ry, size: 11, font: helvOblique, color: DARK });
+    page.drawText(e.school, { x: RX, y: ry, size: 10, font: helvOblique, color: SOFT });
     ry -= 16;
     ry = paragraph(page, {
       text: e.text,
       x: RX,
       y: ry,
       maxWidth: MAXW,
-      size: 9.5,
+      size: 9,
       lineHeight: 14,
       font: helv,
-      color: DARK,
+      color: SOFT,
     });
   }
 
-  ry -= 30;
-  ry = sectionTitle(page, { x: RX, y: ry, label: "Projets", font: helvBold, color: DARK, titleWidth: 58 });
+  ry -= 34;
+  ry = sectionTitle(page, { x: RX, y: ry, label: "Projets", font: helvBold, color: INK, titleWidth: 58 });
   for (const p of PROJECTS) {
-    page.drawText(p.num, { x: RX, y: ry, size: 10, font: helvBold, color: ACCENT });
-    page.drawText(p.title, { x: RX + 22, y: ry, size: 14, font: helvBold, color: DARK });
-    const typeWidth = helv.widthOfTextAtSize(p.type, 8);
+    page.drawText(p.num, { x: RX, y: ry + 2, size: 11, font: helvBold, color: FAINT });
+    page.drawText(p.title, { x: RX + 20, y: ry, size: 13, font: helvBold, color: INK });
     page.drawText(p.type.toUpperCase(), {
-      x: RX + 22 + helvBold.widthOfTextAtSize(p.title, 14) + 14,
+      x: RX + 20 + helvBold.widthOfTextAtSize(p.title, 13) + 12,
       y: ry + 3,
-      size: 7.5,
+      size: 7,
       font: helvBold,
-      color: MUTED,
-      letterSpacing: 1,
+      color: SOFT,
+      letterSpacing: 1.5,
     });
-    void typeWidth;
-    ry -= 17;
+    ry -= 18;
     ry = paragraph(page, {
       text: p.desc,
       x: RX,
       y: ry,
       maxWidth: MAXW,
-      size: 9.5,
-      lineHeight: 15,
+      size: 9,
+      lineHeight: 14,
       font: helv,
-      color: DARK,
+      color: SOFT,
     });
     ry -= 5;
     page.drawText(p.techs.toUpperCase(), {
       x: RX,
       y: ry,
-      size: 7,
+      size: 6.5,
       font: helvBold,
-      color: ACCENT,
-      letterSpacing: 1,
+      color: SOFT,
+      letterSpacing: 1.5,
     });
     ry -= 26;
   }
-
-  // footer
-  page.drawText(`CV — ${PERSONAL.last} ${PERSONAL.name} · 2026`, {
-    x: RX,
-    y: 40,
-    size: 7.5,
-    font: helv,
-    color: MUTED,
-    letterSpacing: 1,
-  });
 
   const bytes = await pdf.save();
   const out = path.resolve("public", "CV.pdf");

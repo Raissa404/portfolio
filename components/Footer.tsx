@@ -2,7 +2,6 @@ import { links, personal } from "@/lib/data";
 
 const socials = [
   { label: "GitHub", href: links.github },
-  { label: "LinkedIn", href: links.linkedin },
   { label: "Email", href: `mailto:${links.email}` },
 ];
 

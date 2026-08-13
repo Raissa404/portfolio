@@ -1,13 +1,12 @@
 export const personal = {
   first: "Onjatina Raissa",
   last: "FANEVASOA",
-  role: "Étudiante en informatique — L2 · EMIT",
+  role: "Développeur fullstack",
   year: "2026",
 };
 
 export const links = {
   github: "https://github.com/",
-  linkedin: "https://www.linkedin.com/",
   email: "fanevasoaonjatinaraissa@gmail.com",
 };
 

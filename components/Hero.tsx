@@ -35,7 +35,7 @@ export default function Hero() {
             <Reveal delay={180}>
               <p className="hero__role">
                 <span className="hero__mark" aria-hidden="true" />
-                Étudiante en informatique — L2 · EMIT
+                Développeur fullstack
               </p>
             </Reveal>
             <Reveal delay={240}>

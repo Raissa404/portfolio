@@ -6,11 +6,6 @@ import { links } from "@/lib/data";
 const contactLinks = [
   { label: "CV", href: "/CV.pdf", text: "Télécharger mon CV (PDF)" },
   { label: "GitHub", href: links.github, text: "github.com/Raissa404" },
-  {
-    label: "LinkedIn",
-    href: links.linkedin,
-    text: "linkedin.com/in/fanevasoa-raissa",
-  },
   { label: "Email", href: `mailto:${links.email}`, text: links.email },
 ];
 
