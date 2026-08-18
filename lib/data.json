@@ -24,7 +24,7 @@
   ],
   "about": {
     "paragraphs": [],
-    "quote": "« Le code transforme une idéegggg en une solution que d'autres peuvent utiliser. »",
+    "quote": "« Le code transforme une idée en une solution que d'autres peuvent utiliser. »",
     "infos": [
       {
         "num": "01",
@@ -129,7 +129,7 @@
       "techs": [
         "Java"
       ],
-      "image": "/project-02.png",
+      "image": "/project-03.png",
       "demo": "#projets",
       "github": "https://github.com/Raissa404/gestion-bibliotheque"
     },
@@ -142,7 +142,7 @@
         "PHP",
         "MySQL"
       ],
-      "image": "/project-03.png",
+      "image": "/project-02.png",
       "demo": "#projets",
       "github": "https://github.com/Raissa404/gestion-vente-aluminium"
     }

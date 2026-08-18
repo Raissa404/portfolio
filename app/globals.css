@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 76px;
 }
 
 body {
@@ -497,10 +498,11 @@ section[id] {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 60;
   background: var(--paper);
   display: flex;
   flex-direction: column;
-  padding: 2rem var(--pad);
+  padding: 1.5rem var(--pad) calc(2rem + env(safe-area-inset-bottom, 0px));
   gap: 0.25rem;
   opacity: 0;
   transform: translateY(-8px);
@@ -509,6 +511,7 @@ section[id] {
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease),
     visibility 0.3s;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .nav__mobile.is-open {
@@ -520,9 +523,9 @@ section[id] {
 
 .nav__mobile a {
   font-family: var(--serif);
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 6.5vw, 2rem);
   line-height: 1.2;
-  padding: 0.6rem 0;
+  padding: 0.4rem 0;
   border-bottom: 1px solid var(--line);
 }
 
